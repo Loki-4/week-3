@@ -1,0 +1,81 @@
+show databases;  -- get all databases 
+select * from rgm;
+update rgm set name="lakshmi" where contact=4568;
+-- we have to make changes we need to go edit then preferences then sql editor
+update rgm set name="lakshaman" where adress="hyderabad";
+update rgm set name="lakshmi" ,college ="src" where contact=4568;
+select * from student;
+create table test(id int primary key not null,name varchar(45) not null,contact int not null, dept varchar(45) not null);
+select * from test;
+insert into test select * from student; -- all data in student table into test
+select * from test;
+truncate table test; -- whole data should be deleted
+select * from student;
+delete from student where S_name="anik";
+drop table test;
+select * from student;
+alter table student rename column S_name to name;-- renaming column name
+alter table student rename to rgm_student;
+show databases;
+drop database sakila;
+alter table rgm_student add adress varchar(45); -- asdding column
+select * from rgm_student;
+update rgm_student set adress="hyderabad" where S_id=573; -- updating adress
+-- insert into rgm_student (adress) values ("kurnool","badwel","sathya sai");
+alter table rgm_student modify column adress varchar(50);
+alter table rgm_student drop column adress;-- adress column dropped
+select * from rgm_student;
+alter table rgm_student drop column S_contact;
+alter table rgm_student drop column S_dept;
+drop table rgm_student; -- table dropped
+--------------------------------------------
+select * from student;
+select max(marks) from student;
+select avg(marks) from student;
+select sum(marks) from student;
+select sum(marks) as total from student;
+-----------------------------------------------
+create database exercise;
+create table customer(cus_id int primary key,name varchar(45),city varchar(34) not null,grade int,id int);
+insert into customer values(101,"loki","hyderabad",89,5001),
+(102,"ravi","bnglr",67,5002),
+(103,"raju","chennai",88,5003),
+(104,"shanthi","sri satya",78,5004),
+(105,"seena","atp",87,5005);
+-- WRITE A SQL QUERY TO FIND OUT THE DETAILS OF THE CUSTOMER  WHOSE GRADE IS ABOVE 80
+select * from customer where grade>=80;
+select * from customer where grade>=80 order by grade asc;
+-- WRITE A SQL QUERY TO FIND OUT THE DETAILS OF THE CUSTOMER WHO ARE LIVING IN THE HYDERABAD CITY AND GRADE >=80
+select * from customer where city="hyderabad" and grade>=80;
+-- WRITE A SQL QUERY TO FIND OUT THE DETAILS OF THE CUSTOMER  WHO ARE LIVING IN THE HYDERABAD CITY or GRADE >=80
+select * from customer where city="hyderabad" or grade>=80;
+-- WRITE AN SQL QUERY TO FIND CUSTOMER DETAILS WHO ARE EITHER FROM ATP CITY OR  WHO DONT HAVE GRADE > 80
+select * from customer where city = "atp" or  not grade >80;
+-- WRITE AN SQL QUERY TO FIND CUSTOMER DETAILS WHO do not belong to bnglr or have grade thart exceeds 80
+select * from customer where not city = "bnglr" or   grade >80;
+select * from customer where not city = "bnglr" or   grade >=80;
+-- find the order details excluding the date 30-4-2023 and id more than 202 or purchase amount > 2000
+create table orders(or_num int primary key,pur_amm int,or_date date,cus_id int, sales_id int);
+select * from orders;
+insert into orders values(2001,2004,"2023-4-29",101,201),
+(2002,1907,"2023-4-30",102,202),
+(2003,2030,"2023-5-1",103,203),
+(2004,2084,"2023-5-2",104,204),
+(2005,2076,"2023-5-3",101,201);
+select * from orders where not or_date="2023-4-30" and sales_id >202 or pur_amm>2000;
+
+-- find the order details WHOSE COMMISIONS ARE WITHIN THE RANGE 0.13 TO 0.43
+select * from salesman where commision between 0.13 and 0.43;
+-- FIND THE SALESMAN DETAILS WHOSE NAME STARTWITH  LETTER
+select * from salesman where name like "p%";
+
+-- CREATE A NEW COLUMN ADRESS ,INSERT SOME DATA IN THAT ADRESS COLUMN AND DISPLAY ALL IIN DESC ORDER
+alter table salesman add  adress varchar(34);
+select * from salesman;
+update salesman set adress="kurnool" where id=5001;
+update salesman set adress="badwel" where id=5002;
+update salesman set adress="satya sai" where id=5003;
+update salesman set adress="atp" where id=5004;
+update salesman set adress="bnglr" where id=5005;
+update salesman set adress="gorantla" where id=5006;
+select adress from salesman order by adress desc;
